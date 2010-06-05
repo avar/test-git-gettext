@@ -14,10 +14,11 @@ uname -a > $LOG
 
 # Test with and without gettext
 $MAKE prefix=/tmp all NO_GETTEXT=YesPlease
-(cd t && for test in ./t02*sh; do ./$test; done) >> $LOG
+(cd t && for test in ./t02*sh -d -v; do ./$test; done) >> $LOG 2>&1
 git clean -dxf > /dev/null
 $MAKE prefix=/tmp all
-(cd t && for test in ./t02*sh; do ./$test; done) >> $LOG
+(cd t && for test in ./t02*sh -d -v; do ./$test; done) >> $LOG 2>&1
 
 # Gimme test data
 cat $LOG
+echo "Feed $LOG to a pastebin please"
