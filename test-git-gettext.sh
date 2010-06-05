@@ -11,4 +11,4 @@ gmake --version | grep GNU && MAKE=gmake
 # Test with and without gettext
 $MAKE prefix=/tmp all test NO_GETTEXT=YesPlease
 git clean -qdX > /dev/null
-$MAKE prefix=/tmp all test NO_GETTEXT=YesPlease
+$MAKE prefix=/tmp all test 
