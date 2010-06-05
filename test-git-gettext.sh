@@ -13,10 +13,10 @@ LOG=/tmp/git-gettext.txt
 uname -a > $LOG
 
 # Test with and without gettext
-NO_SVN_TESTS=1 $MAKE prefix=/tmp all test NO_GETTEXT=YesPlease
+NO_SVN_TESTS=1 $MAKE prefix=/tmp all NO_GETTEXT=YesPlease
 (cd t && for test in ./t02*sh; do ./$test; done) >> $LOG
 git clean -qdX > /dev/null
-NO_SVN_TESTS=1 $MAKE prefix=/tmp all test 
+NO_SVN_TESTS=1 $MAKE prefix=/tmp all
 (cd t && for test in ./t02*sh; do ./$test; done) >> $LOG
 
 # Gimme test data
