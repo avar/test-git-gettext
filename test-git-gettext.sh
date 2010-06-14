@@ -11,6 +11,8 @@ MYSHELL=/bin/sh
 gmake --version | grep GNU && MAKE=gmake
 test `uname -s` = "SunOS" && MYSHELL=/usr/bin/ksh
 
+echo "Using make $MAKE and shell $MYSHELL"
+
 # Test data
 LOG=/tmp/git-gettext.txt
 uname -a > $LOG
