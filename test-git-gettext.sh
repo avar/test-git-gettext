@@ -15,14 +15,14 @@ uname -a > $LOG
 
 # Test with and without gettext
 git clean -dxf > /dev/null
-$MAKE prefix=/tmp all NO_GETTEXT=YesPlease
+$MAKE prefix=/tmp all NO_CURL=YesPlease NO_GETTEXT=YesPlease
 echo "With NO_GETTEXT=YesPlease" >> $LOG
 echo "With NO_GETTEXT=YesPlease" >> "$LOG-raw"
 (cd t && for test in ./t02*sh; do ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
 (cd t && for test in ./t02*sh; do ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
 
 git clean -dxf > /dev/null
-$MAKE prefix=/tmp all
+$MAKE prefix=/tmp all NO_CURL=YesPlease
 echo "Without NO_GETTEXT=YesPlease" >> $LOG
 echo "Without NO_GETTEXT=YesPlease" >> "$LOG-raw"
 (cd t && for test in ./t02*sh; do ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
