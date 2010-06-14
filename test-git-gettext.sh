@@ -7,7 +7,9 @@ git checkout -b gettext remotes/origin/gettext
 
 # Use GNU make
 MAKE=make
+MYSHELL=/bin/sh
 gmake --version | grep GNU && MAKE=gmake
+test `uname -s` = "SunOS" && MYSHELL=/usr/bin/ksh
 
 # Test data
 LOG=/tmp/git-gettext.txt
@@ -18,20 +20,20 @@ git clean -dxf > /dev/null
 $MAKE -j4 prefix=/tmp all NO_CURL=YesPlease NO_GETTEXT=YesPlease
 echo "With NO_GETTEXT=YesPlease" >> $LOG
 echo "With NO_GETTEXT=YesPlease" >> "$LOG-raw"
-(cd t && for test in ./t02*sh; do ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
-(cd t && for test in ./t02*sh; do ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
+(cd t && for test in ./t02*sh; do $MYSHELL ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
+(cd t && for test in ./t02*sh; do $MYSHELL ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
 
 git clean -dxf > /dev/null
 $MAKE -j4 prefix=/tmp all NO_CURL=YesPlease
 echo "Without NO_GETTEXT=YesPlease" >> $LOG
 echo "Without NO_GETTEXT=YesPlease" >> "$LOG-raw"
-(cd t && for test in ./t02*sh; do ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
-(cd t && for test in ./t02*sh; do ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
+(cd t && for test in ./t02*sh; do $MYSHELL  ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
+(cd t && for test in ./t02*sh; do $MYSHELL  ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
 
 echo "Without NO_GETTEXT=YesPlease and TEST_GIT_I18N_EXHAUSTIVE=1 set" >> $LOG
 echo "Without NO_GETTEXT=YesPlease and TEST_GIT_I18N_EXHAUSTIVE=1 set" >> "$LOG-raw"
-(cd t && for test in ./t02*sh; do TEST_GIT_I18N_EXHAUSTIVE=1 ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
-(cd t && for test in ./t02*sh; do TEST_GIT_I18N_EXHAUSTIVE=1 ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
+(cd t && for test in ./t02*sh; do TEST_GIT_I18N_EXHAUSTIVE=1 $MYSHELL ./$test; done) | sed 's/^/    /' >> $LOG 2>&1
+(cd t && for test in ./t02*sh; do TEST_GIT_I18N_EXHAUSTIVE=1 $MYSHELL ./$test -d -v; done) | sed 's/^/    /' >> "$LOG-raw" 2>&1
 
 # Gimme test data
 cat "$LOG-raw" >> $LOG
