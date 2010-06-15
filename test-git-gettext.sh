@@ -2,7 +2,8 @@
 
 git clone git://github.com/avar/git.git git-gettext
 cd git-gettext
-git pull # in case git-gettext was here already
+# in case git-gettext was here already
+git checkout gettext && git fetch && git reset --hard origin/gettext
 git checkout -b gettext remotes/origin/gettext
 
 # Use GNU make
