@@ -32,10 +32,10 @@ echo "Without NO_GETTEXT=YesPlease" >> "$LOG-raw"
 (cd t && for test in ./t02*sh; do echo "  $test" && $MYSHELL ./$test 2>&1       | sed 's/^/    /'; done) >> $LOG 2>&1
 (cd t && for test in ./t02*sh; do echo "  $test" && $MYSHELL ./$test -d -v 2>&1 | sed 's/^/    /'; done) >> "$LOG-raw" 2>&1
 
-echo "Without NO_GETTEXT=YesPlease and TEST_GIT_I18N_EXHAUSTIVE=1 set" >> $LOG
-echo "Without NO_GETTEXT=YesPlease and TEST_GIT_I18N_EXHAUSTIVE=1 set" >> "$LOG-raw"
-(cd t && for test in ./t02*sh; do echo "  $test" && TEST_GIT_I18N_EXHAUSTIVE=1 $MYSHELL ./$test 2>&1       | sed 's/^/    /'; done) >> $LOG 2>&1
-(cd t && for test in ./t02*sh; do echo "  $test" && TEST_GIT_I18N_EXHAUSTIVE=1 $MYSHELL ./$test -d -v 2>&1 | sed 's/^/    /'; done) >> "$LOG-raw" 2>&1
+echo "Without NO_GETTEXT=YesPlease and TEST_GIT_GETTEXT_EXHAUSTIVE=1 set" >> $LOG
+echo "Without NO_GETTEXT=YesPlease and TEST_GIT_GETTEXT_EXHAUSTIVE=1 set" >> "$LOG-raw"
+(cd t && for test in ./t02*sh; do echo "  $test" && TEST_GIT_GETTEXT_EXHAUSTIVE=1 $MYSHELL ./$test 2>&1       | sed 's/^/    /'; done) >> $LOG 2>&1
+(cd t && for test in ./t02*sh; do echo "  $test" && TEST_GIT_GETTEXT_EXHAUSTIVE=1 $MYSHELL ./$test -d -v 2>&1 | sed 's/^/    /'; done) >> "$LOG-raw" 2>&1
 
 # Gimme test data
 cat "$LOG-raw" >> $LOG
